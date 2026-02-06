@@ -4,9 +4,6 @@ using Week1;
 using Week1.MyCollections;
 using Week2.Iterator_Pattern;
 
-//Week 2 Exercise: Implement Set class. It is a collection that stores elements without repetition.
-//Week 2 Exercise: Implement the iterator pattern in every collection type.
-
 namespace Week2.MyCollections
 {
     /// <summary>

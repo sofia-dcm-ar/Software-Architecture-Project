@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using Week2;
 using Week2.Iterator_Pattern;
 
-//Week 2 Exercise: Implement the iterator pattern in every collection type.
-
 namespace Week1.MyCollections
 {
     /// <summary>

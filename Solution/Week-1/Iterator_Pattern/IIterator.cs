@@ -5,8 +5,6 @@ using Week1.MyCollections;
 
 namespace Week2.Iterator_Pattern
 {
-    //Week 2 Exercise -> Implement the Iterator Pattern for collections
-
     /// <summary>
     /// Defines the contract for collection iteration logic following the Iterator Pattern.
     /// </summary>
