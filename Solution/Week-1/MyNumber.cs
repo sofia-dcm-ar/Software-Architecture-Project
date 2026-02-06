@@ -3,7 +3,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 //Week 1 Exercise: Create an integer that can compare itself.
 
-namespace Week2
+namespace Week1
 {
     /// <summary>
     /// A wrapper class for an <see cref="int"/> with comparison capabilities.

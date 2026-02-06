@@ -1,5 +1,7 @@
 ﻿using System;
 using static System.Net.Mime.MediaTypeNames;
+using Week1;
+using Week1.MyCollections;
 
 namespace Week2.Iterator_Pattern
 {

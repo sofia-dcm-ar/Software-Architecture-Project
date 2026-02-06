@@ -1,4 +1,6 @@
 ﻿using System;
+using Week1;
+using Week1.MyCollections;
 using Week2.MyCollections;
 
 namespace Week2.Iterator_Pattern

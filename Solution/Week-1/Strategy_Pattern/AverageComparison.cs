@@ -1,4 +1,5 @@
 ﻿using System;
+using Week1;
 
 namespace Week2.Strategy_Pattern
 {

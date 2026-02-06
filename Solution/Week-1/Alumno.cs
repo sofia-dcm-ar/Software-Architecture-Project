@@ -3,7 +3,7 @@ using Week2.Strategy_Pattern;
 //Week 2 Exercise: Implements the Strategy pattern to allow different comparison criteria based on student attributes.
 //NOTE: "Alumno" stays in spanish for future Adapter pattern exercise.
 
-namespace Week2
+namespace Week1
 {
     /// <summary>
     /// Represents a Student entity that extends <see cref="Person"/> with academic attributes.

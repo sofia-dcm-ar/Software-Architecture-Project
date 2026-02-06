@@ -3,7 +3,7 @@ using Week2;
 using Week2.Iterator_Pattern;
 //Week 1 Exercise: Create an interfase for collections that can compare their elements
 
-namespace Week2.MyCollections
+namespace Week1.MyCollections
 {
     /// <summary>
     /// Defines the contract for a collection of <see cref="IMyComparable"/> elements. Provides methods of search, count, addition and comparison.

@@ -1,7 +1,7 @@
 ﻿using System;
 //Week 1 Exercise: Create an interface for objects that can compare themselves with others
 
-namespace Week2
+namespace Week1
 {
     /// <summary>
     /// Defines the contract for objects that can be compared for equality and ordering.

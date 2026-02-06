@@ -5,7 +5,7 @@ using Week2.Iterator_Pattern;
 
 //Week 2 Exercise: Implement the iterator pattern in every collection type.
 
-namespace Week2.MyCollections
+namespace Week1.MyCollections
 {
     /// <summary>
     /// Represents a Stack-based implementation of <see cref="IMyCollection"/> that stores <see cref="IMyComparable"/> elements.

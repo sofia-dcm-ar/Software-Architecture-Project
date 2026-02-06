@@ -2,7 +2,7 @@
 
 //Week 1 Exercise: Create a Person with identity atributes that can compare itself.
 
-namespace Week2
+namespace Week1
 {
     /// <summary>
     /// Represents the base structure for a person with identification and comparison capabilities.

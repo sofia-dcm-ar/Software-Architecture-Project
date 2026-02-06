@@ -1,6 +1,7 @@
 ﻿using System;
+using Week1;
 using Week2.Iterator_Pattern;
-using Week2.MyCollections;
+using Week1.MyCollections;
 using Week2.Strategy_Pattern;
 
 //Week 2 Exercise:
@@ -54,15 +55,15 @@ namespace Week2
             Console.WriteLine(collection.Minimum().ToString()); 
             Console.WriteLine("\nOlder Student\n");
             Console.WriteLine(collection.Maximum().ToString());
-            Console.Write("Introduce information for search:");
+            Console.Write("\nIntroduce information for search:");
             string search = Console.ReadLine();
             double searchNumber = 0;
             double.TryParse(search, out searchNumber);
             IMyComparable searched = new Alumno(search, (int)searchNumber, (int)searchNumber, searchNumber);
             if (collection.Contains(searched))
-                Console.WriteLine("The read element is in the collection");
+                Console.WriteLine("\nThe read element is in the collection");
             else
-                Console.WriteLine("The read element is not in the collection");
+                Console.WriteLine("\nThe read element is not in the collection");
         }
 
         /// <summary>
