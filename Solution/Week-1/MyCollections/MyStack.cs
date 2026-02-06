@@ -71,7 +71,7 @@ namespace Week2.MyCollections
         #endregion
 
         // -----------------------------------------------------------
-        // IIterableCollection Implementation
+        // Iterator Pattern Implementation (IIterableCollection)
         // -----------------------------------------------------------
         public IIterator CreateIterator()
         {

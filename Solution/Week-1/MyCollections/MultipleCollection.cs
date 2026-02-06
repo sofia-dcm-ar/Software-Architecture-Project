@@ -1,5 +1,6 @@
 ﻿using System;
 using Week2;
+using Week2.Iterator_Pattern;
 //Week 1 Exercise: create an object that has inside a Stack and Queue, and can compare its elements like a whole only collection
 
 namespace Week2.MyCollections
@@ -81,5 +82,13 @@ namespace Week2.MyCollections
 
         }
         #endregion
+
+        // -----------------------------------------------------------
+        // Iterator Pattern Implementation (IIterableCollection)
+        // -----------------------------------------------------------
+        public IIterator CreateIterator() //just for the interface requirement
+        {
+            return null;
+        }
     }
 }

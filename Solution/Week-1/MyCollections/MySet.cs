@@ -63,7 +63,7 @@ namespace Week2.MyCollections
         }
 
         // -----------------------------------------------------------
-        // IIterableCollection Implementation
+        // Iterator Pattern Implementation (IIterableCollection)
         // -----------------------------------------------------------
         public IIterator CreateIterator()
         {
