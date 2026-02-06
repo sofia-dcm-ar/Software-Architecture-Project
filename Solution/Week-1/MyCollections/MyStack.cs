@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Week2;
+using Week2.Iterator_Pattern;
 
-//Week 1 Exercise: create a stack that can compare its elements
+//Week 2 Exercise: Implement the iterator pattern in every collection type.
 
-namespace Week1.MyCollections
+namespace Week2.MyCollections
 {
     /// <summary>
     /// Represents a Stack-based implementation of <see cref="IMyCollection"/> that stores <see cref="IMyComparable"/> elements.
@@ -68,6 +70,14 @@ namespace Week1.MyCollections
         }
         #endregion
 
+        // -----------------------------------------------------------
+        // IIterableCollection Implementation
+        // -----------------------------------------------------------
+        public IIterator CreateIterator()
+        {
+            return new MyStackIterator(this);
+        }
+
         //-----------------------------------------------------------
         // Stack methods
         //-----------------------------------------------------------
@@ -81,6 +91,11 @@ namespace Week1.MyCollections
             IMyComparable stack = _stacked[_stacked.Count -1];
             _stacked.RemoveAt(_stacked.Count -1);
             return stack;
+        }
+
+        public IMyComparable GetElement(int i)
+        { //Week 2: create this method to allow the iterator to access the specific elements
+            return _stacked[i];
         }
     }
 }

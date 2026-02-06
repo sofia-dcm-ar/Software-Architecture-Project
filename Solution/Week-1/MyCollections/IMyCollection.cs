@@ -1,14 +1,18 @@
 ﻿using System;
+using Week2;
+using Week2.Iterator_Pattern;
 //Week 1 Exercise: Create an interfase for collections that can compare their elements
 
-namespace Week1.MyCollections
+namespace Week2.MyCollections
 {
     /// <summary>
     /// Defines the contract for a collection of <see cref="IMyComparable"/> elements. Provides methods of search, count, addition and comparison.
     /// </summary>
-    /// <remarks>This interface is intended for homogenic collections that store elements implementing <see cref="IMyComparable"/>. 
-    /// It provides methods to determine the number of elements, retrieve the minimum and maximum elements, add new elements, and check for the presence of a specific element.</remarks>
-    public interface IMyCollection
+    /// <remarks>
+    /// This interface is intended for homogenic collections that store elements implementing <see cref="IMyComparable"/>. 
+    /// It provides methods to determine the number of elements, retrieve the minimum and maximum elements, add new elements, and check for the presence of a specific element.
+    /// </remarks>
+    public interface IMyCollection :IIterableCollection
     {
         /// <summary>
         /// Returns the number of elements in the collection.

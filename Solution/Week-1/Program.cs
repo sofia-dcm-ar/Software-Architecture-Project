@@ -1,11 +1,11 @@
 ﻿using System;
-using Week1.MyCollections;
+using Week2.MyCollections;
 
 //Week 1 Exercise:
 //implement a main module where a multipleCollection is created
 //fill and report the collection using functions
 
-namespace Week1
+namespace Week2
 {
     class Program
     {

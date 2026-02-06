@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Week2;
+using Week2.Iterator_Pattern;
 
-//Week 1 Exercise: create a Queue that can compare its elements
+//Week 2 Exercise: Implement the iterator pattern in every collection type.
 
-namespace Week1.MyCollections
+namespace Week2.MyCollections
 {
     /// <summary>
     /// Represents a Queue-based implementation of <see cref="IMyCollection"/> that stores <see cref="IMyComparable"/> elements.
@@ -19,7 +21,6 @@ namespace Week1.MyCollections
         {
             _queued= new List<IMyComparable>();
         }
-
 
         // -----------------------------------------------------------
         // IMyCollection Implementation
@@ -69,6 +70,14 @@ namespace Week1.MyCollections
         }
         #endregion
 
+        // -----------------------------------------------------------
+        // IIterableCollection Implementation
+        // -----------------------------------------------------------
+        public IIterator CreateIterator()
+        {
+            return new MyQueueIterator(this);
+        }
+
         //-----------------------------------------------------------
         // Queue methods
         //-----------------------------------------------------------
@@ -82,6 +91,11 @@ namespace Week1.MyCollections
             IMyComparable element = _queued[0];
             _queued.RemoveAt(0);
             return element;
+        }
+
+        public IMyComparable GetElement(int i)
+        { //Week 2: create this method to allow the iterator to access the specific elements
+            return _queued[i];
         }
     }
 }

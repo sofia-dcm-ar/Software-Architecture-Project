@@ -1,8 +1,8 @@
 ﻿using System;
-
+using Week2;
 //Week 1 Exercise: create an object that has inside a Stack and Queue, and can compare its elements like a whole only collection
 
-namespace Week1.MyCollections
+namespace Week2.MyCollections
 {
     /// <summary>
     /// A composite collection that encapsulates both a <see cref="MyStack"/> and a <see cref="MyQueue"/>, 

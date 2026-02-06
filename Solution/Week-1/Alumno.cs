@@ -1,8 +1,9 @@
 ﻿using System;
-//Week 1 Exercise: Create a student that is a Person.
+using Week2.Strategy_Pattern;
+//Week 2 Exercise: Implements the Strategy pattern to allow different comparison criteria based on student attributes.
 //NOTE: "Alumno" stays in spanish for future Adapter pattern exercise.
 
-namespace Week1
+namespace Week2
 {
     /// <summary>
     /// Represents a Student entity that extends <see cref="Person"/> with academic attributes.
@@ -14,11 +15,13 @@ namespace Week1
     {
         private int _fileNumber;
         private double _average;
+        private IComparisonStrategy _strategy; //Week 2: create a strategy attribute
 
         public Alumno(string name, int id, int fileNumber, double average) : base(name, id)
         {
             _fileNumber=fileNumber;
             _average=average;
+            _strategy= new IDComparison();//Week 2: initialize with a default strategy
         }
 
         public int FileNumber { get => _fileNumber; }
@@ -27,19 +30,29 @@ namespace Week1
         // ---------------------------------------------------------
         // IMyComparable Implementation
         // ---------------------------------------------------------
+        // Week 2: now delegate to Strategy Pattern Comparison
         public override bool IsEqual(IMyComparable other)
         {
-            return _fileNumber==((Alumno)other)._fileNumber;
+            return _strategy.IsEqual(this, (Alumno)other);
         }
 
         public override bool IsLessThan(IMyComparable other)
         {
-            return _fileNumber<((Alumno)other)._fileNumber;
+            return _strategy.IsLessThan(this, (Alumno)other);
         }
 
         public override bool IsGreaterThan(IMyComparable other)
         {
-            return _fileNumber>((Alumno)other)._fileNumber;
+            return _strategy.IsGreaterThan(this, (Alumno)other);
+        }
+
+        // ---------------------------------------------------------
+        // Strategy Pattern Implementation
+        // ---------------------------------------------------------
+
+        public void SetStrategy(IComparisonStrategy newStrategy)
+        {
+            _strategy=newStrategy;
         }
 
         // ---------------------------------------------------------
