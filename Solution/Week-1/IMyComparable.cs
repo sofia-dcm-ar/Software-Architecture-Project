@@ -1,5 +1,4 @@
 ﻿using System;
-//Week 1 Exercise: Create an interface for objects that can compare themselves with others
 
 namespace Week1
 {

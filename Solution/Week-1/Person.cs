@@ -1,7 +1,5 @@
 ﻿using System;
 
-//Week 1 Exercise: Create a Person with identity atributes that can compare itself.
-
 namespace Week1
 {
     /// <summary>
