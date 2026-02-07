@@ -83,8 +83,10 @@ namespace Week3
         /// </remarks>
         public void SpeakToTheClass()
         {
+            this.PrintTitle("Professor Action");
             Console.WriteLine("\nTalking to the class\n");
             this._speaking=true;
+            this.PrintTitle("Alumnos Reactions");
             this.Notify();
         }
 
@@ -96,9 +98,16 @@ namespace Week3
         /// </remarks>
         public void WriteInTheBoard()
         {
+            this.PrintTitle("Professor Action");
             Console.WriteLine("\nWriting on the board\n");
             this._speaking=false;
+            this.PrintTitle("Alumnos Reactions");
             this.Notify();
+        }
+
+        public void PrintTitle(string title)
+        {
+            Console.WriteLine("\n-----------------"+title+"-----------------\n");
         }
     }
 }

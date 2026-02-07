@@ -1,34 +1,33 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using Week1;
-using Week2.Iterator_Pattern;
 using Week1.MyCollections;
+using Week2.Iterator_Pattern;
 using Week2.Strategy_Pattern;
+using Week3.FactoryMethod_Pattern;
 
-//Week 2 Exercise:
-//ITERATOR-> modify main to use printElements
-//STRATEGY -> modify main to change comparison strategy of the elements
+// Factorys: ( 1 MyNumber ) ( 2 Alumno ) ( 3 Professor )
+// Week 3 Exercise: Implement a main where the Professor has a class to teach.
 
-namespace Week2
+namespace Week3
 {
     class Program
     {
         public static void Main(string[] args)
         {
 
-            MyQueue queued = new MyQueue();
-            FillAlumnos(queued);
-            PrintTitle("Comparison for Name");
-            ChangeComparisonStrategy(queued, new NameComparison());
-            Report(queued);
-            PrintTitle("Comparison for File Number");
-            ChangeComparisonStrategy(queued, new FileNumberComparison());
-            Report(queued);
-            PrintTitle("Comparison for Average");
-            ChangeComparisonStrategy(queued, new AverageComparison());
-            Report(queued);
-            PrintTitle("Comparison for ID");
-            ChangeComparisonStrategy(queued, new IDComparison());
-            Report(queued);
+            Professor professor = ((Professor)MyComparableFactory.RandomCreate(3));
+            MyStack stacked = new MyStack();
+            FillCollection(stacked, 2);
+
+            IIterator iterator = stacked.CreateIterator();
+            while (!iterator.IsDone())
+            {
+                professor.Attach((Alumno)iterator.CurrentItem());
+                iterator.Next();
+            }
+
+            TeachingClasses(professor);
 
             Console.Write("Press any key to continue . . . ");
             Console.ReadKey(true);
@@ -47,40 +46,29 @@ namespace Week2
         /// </summary>
         /// <remarks>The report includes the total elements count, the minimum and maximum values, and the result of searching for a specific element provided via keyboard input</remarks>
         /// <param name="collection">The <see cref="IMyCollection"/> instance to be analyzed.</param>
-        public static void Report(IMyCollection collection)
+        /// <param name="option">Determines which concrete object to create for search in the collection (1: Number, 2: Alumno, 3: Professor).</param>
+        public static void Report(IMyCollection collection, int option)
         {
-            Console.WriteLine("Number of Items: ");
-            Console.WriteLine(collection.Count());
-            Console.WriteLine("\nYounger Student\n"); 
-            Console.WriteLine(collection.Minimum().ToString()); 
-            Console.WriteLine("\nOlder Student\n");
-            Console.WriteLine(collection.Maximum().ToString());
-            Console.Write("\nIntroduce information for search:");
-            string search = Console.ReadLine();
-            double searchNumber = 0;
-            double.TryParse(search, out searchNumber);
-            IMyComparable searched = new Alumno(search, (int)searchNumber, (int)searchNumber, searchNumber);
-            if (collection.Contains(searched))
+            Console.WriteLine("Number of Items: "+ collection.Count());
+            Console.WriteLine("Greaten Element: "+collection.Maximum());
+            Console.WriteLine("Lesser Element: "+collection.Minimum());
+            IMyComparable comparable = MyComparableFactory.KeyboardCreate(option);
+            if (collection.Contains(comparable))
                 Console.WriteLine("\nThe read element is in the collection");
             else
                 Console.WriteLine("\nThe read element is not in the collection");
         }
 
         /// <summary>
-        /// Fill the <see cref="IMyCollection"/> with 20 random <see cref="Alumno"/>.
+        /// Fill the <see cref="IMyCollection"/> with 20 random <see cref="IMyComparable"/> objects.
         /// </summary>
         /// <param name="collection">The <see cref="IMyCollection"/> instance to be filled.</param>
-        public static void FillAlumnos (IMyCollection collection)
+        /// <param name="option">Determines which concrete objects to create for fill the collection (1: Number, 2: Alumno, 3: Professor).</param>
+        public static void FillCollection(IMyCollection collection, int option)
         {
-            Random r = new Random();
-            FileNumberComparison comparison = new FileNumberComparison();
-            string[] names = new string[] { "Johnny", "Simon", "John", "Kyle", "Alejandro", "Joel", "Arthur", "Leon", "Valeria", "Kate", "Farah", "Sarah", "Ada", "Helena", "Alice" };
             for (int i = 0; i<20; i++)
             {
-                double prom = double.Parse(r.NextDouble().ToString("F2")); //Para que sean solo dos cifras significativas
-                IMyComparable student = new Alumno(names[r.Next(names.Length-1)], r.Next(10000000, 50000000), r.Next(10000, 70000), prom);
-                ((Alumno)student).SetStrategy(comparison);
-                collection.Add(student);
+                collection.Add(MyComparableFactory.RandomCreate(option));
             }
         }
 
@@ -112,6 +100,19 @@ namespace Week2
             {
                 ((Alumno)concreteIterator.CurrentItem()).SetStrategy(newStrategy);
                 concreteIterator.Next();
+            }
+        }
+
+        /// <summary>
+        /// Teaches a class speaking and writing.
+        /// </summary>
+        /// <param name="professor">The <see cref="Professor"/> instance that teach the class.</param>
+        public static void TeachingClasses(Professor professor)
+        {
+            for (int i = 0; i<2; i++)
+            {
+                professor.SpeakToTheClass();
+                professor.WriteInTheBoard();
             }
         }
     }
