@@ -1,7 +1,6 @@
 ﻿using System;
 using Week2;
 using Week2.Iterator_Pattern;
-//Week 1 Exercise: create an object that has inside a Stack and Queue, and can compare its elements like a whole only collection
 
 namespace Week1.MyCollections
 {

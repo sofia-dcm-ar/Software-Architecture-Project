@@ -1,6 +1,8 @@
 ﻿using System;
 using Week2.Strategy_Pattern;
-//Week 2 Exercise: Implements the Strategy pattern to allow different comparison criteria based on student attributes.
+using Week3;
+using Week3.Observer_Pattern;
+//Week 3 Exercise: Implements the Observer pattern to allow the student observe the Professor.
 //NOTE: "Alumno" stays in spanish for future Adapter pattern exercise.
 
 namespace Week1
@@ -11,7 +13,7 @@ namespace Week1
     /// <remarks>
     /// Inherits comparison logic from <see cref="Person"/> and implements specific student behaviors.
     /// </remarks>
-    public class Alumno : Person, IMyComparable
+    public class Alumno : Person, IObserver
     {
         private int _fileNumber;
         private double _average;
@@ -47,6 +49,17 @@ namespace Week1
         }
 
         // ---------------------------------------------------------
+        // Observer Pattern Implementation (IObserver)
+        // ---------------------------------------------------------
+        public void Update(IObservable observable)
+        {
+            if (((Professor)observable).Speaking)
+                this.PayAttention();
+            else
+                this.LoseFocus();
+        }
+
+        // ---------------------------------------------------------
         // Strategy Pattern Implementation
         // ---------------------------------------------------------
 
@@ -61,7 +74,31 @@ namespace Week1
         public override string ToString()
         {
             return base.ToString()+"\nStudent File Number: "+_fileNumber.ToString()+"\nAverage: "+((float)_average).ToString("F2");
-            
         }
+
+        /// <summary>
+        /// Causes the current object to pay attention to the class.
+        /// </summary>
+        /// <remarks>
+        /// This method simulates paying attention displaying a message.
+        /// </remarks>
+        public void PayAttention()
+        {
+            Console.WriteLine("Paying Attention");
+        }
+
+        /// <summary>
+        /// Causes the current object to lose focus and perform a random distraction action.
+        /// </summary>
+        /// <remarks>
+        /// This method simulates a loss of focus by selecting and displaying a random distraction action. 
+        /// </remarks>
+        public void LoseFocus()
+        {
+            Random r = new Random();
+            string[] actions = { "Looking out the window", "Checking the phone", "Drawing in the margin of the folder", "Throwing paper airplanes" };
+            Console.WriteLine(actions[r.Next(2)]);
+        }
+
     }
 }

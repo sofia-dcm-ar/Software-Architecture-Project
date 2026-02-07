@@ -5,8 +5,6 @@ using Week2.MyCollections;
 
 namespace Week2.Iterator_Pattern
 {
-    //Week 2 ITERATOR -> Concrete iterator : Queue iterator
-
     /// <summary>
     /// Implements the concrete iterator logic for <see cref="MyQueue"/> based on the Iterator Pattern.
     /// </summary>
