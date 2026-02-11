@@ -4,8 +4,8 @@
  * Adpater and Decorator patterns 
  *
  * IMPORTANT 
- * The code in this file should NOT be modified for solve the exercise
- * This code is originaly in english, because the adapter exercise was based on connect spanish code to english code 
+ * The code in this file should NOT be modified for solve the exercise.
+ * This code is originaly in english, because the adapter exercise was based on connect spanish code to english code.
  */
  
 using System;

@@ -1,6 +1,7 @@
 ﻿using System;
+using Week1;
 
-namespace Week1
+namespace Week1.People
 {
     /// <summary>
     /// Represents the base structure for a person with identification and comparison capabilities.

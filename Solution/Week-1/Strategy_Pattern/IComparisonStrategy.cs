@@ -1,5 +1,5 @@
 ﻿using System;
-using Week1;
+using Week1.People;
 
 namespace Week2.Strategy_Pattern
 {

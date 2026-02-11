@@ -1,11 +1,12 @@
 ﻿using System;
+using Week1;
 using Week2.Strategy_Pattern;
-using Week3;
 using Week3.Observer_Pattern;
-//Week 3 Exercise: Implements the Observer pattern to allow the student observe the Professor.
+using Week4.People;
+//Week 4 Exercise: Add calification attribute 
 //NOTE: "Alumno" stays in spanish for future Adapter pattern exercise.
 
-namespace Week1
+namespace Week1.People
 {
     /// <summary>
     /// Represents a Student entity that extends <see cref="Person"/> with academic attributes.
@@ -13,21 +14,24 @@ namespace Week1
     /// <remarks>
     /// Inherits comparison logic from <see cref="Person"/> and implements specific student behaviors.
     /// </remarks>
-    public class Alumno : Person, IObserver
+    public class Alumno : Person, IAlumno
     {
         private int _fileNumber;
         private double _average;
-        private IComparisonStrategy _strategy; //Week 2: create a strategy attribute
+        private IComparisonStrategy _strategy;
+        private int _calification;// Week 4
 
         public Alumno(string name, int id, int fileNumber, double average) : base(name, id)
         {
             _fileNumber=fileNumber;
             _average=average;
-            _strategy= new IDComparison();//Week 2: initialize with a default strategy
+            _strategy= new IDComparison();
+            _calification=0; // Week 4
         }
 
         public int FileNumber { get => _fileNumber; }
         public double Average { get => _average; }
+        public int Calification { get => _calification; set => _calification = value; } // Week 4
 
         // ---------------------------------------------------------
         // IMyComparable Implementation
@@ -54,9 +58,9 @@ namespace Week1
         public void Update(IObservable observable)
         {
             if (((Professor)observable).Speaking)
-                this.PayAttention();
+                PayAttention();
             else
-                this.LoseFocus();
+                LoseFocus();
         }
 
         // ---------------------------------------------------------
@@ -76,23 +80,11 @@ namespace Week1
             return base.ToString()+"\nStudent File Number: "+_fileNumber.ToString()+"\nAverage: "+((float)_average).ToString("F2");
         }
 
-        /// <summary>
-        /// Causes the current object to pay attention to the class.
-        /// </summary>
-        /// <remarks>
-        /// This method simulates paying attention displaying a message.
-        /// </remarks>
         public void PayAttention()
         {
             Console.WriteLine("Paying Attention");
         }
 
-        /// <summary>
-        /// Causes the current object to lose focus and perform a random distraction action.
-        /// </summary>
-        /// <remarks>
-        /// This method simulates a loss of focus by selecting and displaying a random distraction action. 
-        /// </remarks>
         public void LoseFocus()
         {
             Random r = new Random();
@@ -100,5 +92,15 @@ namespace Week1
             Console.WriteLine(actions[r.Next(2)]);
         }
 
+        public virtual int AnswerQuestion(int question) // Week 4
+        {
+            Random r = new Random();
+            return r.Next(1, 3);
+        }
+
+        public string ShowCalification()
+        {
+            return string.Format("{0}     {1}", _name, _calification);
+        }
     }
 }
