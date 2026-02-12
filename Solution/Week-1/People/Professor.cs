@@ -5,7 +5,7 @@ using Week3.Observer_Pattern;
 // Week 3 Exercise: Create the Professor class, subclass of Person
 // OBSERVER -> Make the Proffesor an observed Person
 
-namespace Week3
+namespace Week1.People
 {
     /// <summary>
     /// Represents a Professor entity that extends <see cref="Person"/> with academic job attributes.
@@ -21,9 +21,9 @@ namespace Week3
 
         public Professor(int tenure, string name, int id) : base(name, id)
         {
-            this._tenure=tenure;
-            this._alumnos = new List<IObserver>();
-            this._speaking=false;
+            _tenure=tenure;
+            _alumnos = new List<IObserver>();
+            _speaking=false;
         }
 
         public int Tenure { get =>  _tenure; }
@@ -34,17 +34,17 @@ namespace Week3
         // ---------------------------------------------------------
         public override bool IsEqual(IMyComparable other)
         {
-            return (_tenure==((Professor)other)._tenure);
+            return _tenure==((Professor)other)._tenure;
         }
 
         public override bool IsLessThan(IMyComparable other)
         {
-            return (_tenure<((Professor)other)._tenure);
+            return _tenure<((Professor)other)._tenure;
         }
 
         public override bool IsGreaterThan(IMyComparable other)
         {
-            return (_tenure>((Professor)other)._tenure);
+            return _tenure>((Professor)other)._tenure;
         }
 
         // ---------------------------------------------------------
@@ -53,12 +53,12 @@ namespace Week3
 
         public void Attach(IObserver o)
         {
-            this._alumnos.Add(o);
+            _alumnos.Add(o);
         }
 
         public void Detach(IObserver o)
         {
-            this._alumnos.Remove(o);
+            _alumnos.Remove(o);
         }
 
         public void Notify()
@@ -83,11 +83,11 @@ namespace Week3
         /// </remarks>
         public void SpeakToTheClass()
         {
-            this.PrintTitle("Professor Action");
+            PrintTitle("Professor Action");
             Console.WriteLine("\nTalking to the class\n");
-            this._speaking=true;
-            this.PrintTitle("Alumnos Reactions");
-            this.Notify();
+            _speaking=true;
+            PrintTitle("Alumnos Reactions");
+            Notify();
         }
 
         /// <summary>
@@ -98,11 +98,11 @@ namespace Week3
         /// </remarks>
         public void WriteInTheBoard()
         {
-            this.PrintTitle("Professor Action");
+            PrintTitle("Professor Action");
             Console.WriteLine("\nWriting on the board\n");
-            this._speaking=false;
-            this.PrintTitle("Alumnos Reactions");
-            this.Notify();
+            _speaking=false;
+            PrintTitle("Alumnos Reactions");
+            Notify();
         }
 
         public void PrintTitle(string title)

@@ -1,4 +1,5 @@
 ﻿using System;
+using Week1.People;
 using Week1;
 
 //Week 3 Exercise: Concrete Factory -> Professor Factory
