@@ -1,13 +1,19 @@
-﻿using Microsoft.VisualBasic.FileIO;
+﻿using MetodologíasDeProgramaciónI;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using Week1;
 using Week1.MyCollections;
+using Week1.People;
 using Week2.Iterator_Pattern;
 using Week2.Strategy_Pattern;
 using Week3.FactoryMethod_Pattern;
+using Week4.Decorator_Pattern;
+using Week4.People;
 
-// Factorys: ( 1 MyNumber ) ( 2 Alumno ) ( 3 Professor )
-// Week 3 Exercise: Implement a main where the Professor has a class to teach.
+// Factories: ( 1 MyNumber ) ( 2 Alumno ) ( 3 Professor ) ( 4 DiligentAlumno ) ( 5 AlumnoBaseDecorator ) ( 6 DiligentAlumnoBaseDecorator )
+// Week 4 Exercise: Implement a main function that instantiates a teacher, makes 20 students arrive with the GoToClass method
+//The Students are instances of the adapter implemented in the previous exercise.
+//10 of them will adapt an instance of the Alumno class, while another 10 will adapt DiligentAlumno
 
 namespace Week3
 {
@@ -16,18 +22,13 @@ namespace Week3
         public static void Main(string[] args)
         {
 
-            Professor professor = ((Professor)MyComparableFactory.RandomCreate(3));
-            MyStack stacked = new MyStack();
-            FillCollection(stacked, 2);
-
-            IIterator iterator = stacked.CreateIterator();
-            while (!iterator.IsDone())
+            Teacher teacher = new Teacher();
+            for (int i = 0; i<10; i++)
             {
-                professor.Attach((Alumno)iterator.CurrentItem());
-                iterator.Next();
+                teacher.goToClass(new AlumnoAdapter((AlumnoBaseDecorator)MyComparableFactory.RandomCreate(5)));
+                teacher.goToClass(new AlumnoAdapter((AlumnoBaseDecorator)MyComparableFactory.RandomCreate(6)));
             }
-
-            TeachingClasses(professor);
+            teacher.teachingAClass();
 
             Console.Write("Press any key to continue . . . ");
             Console.ReadKey(true);
