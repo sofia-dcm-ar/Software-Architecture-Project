@@ -21,6 +21,7 @@ namespace Week4.People
         double Average { get; }
         int Calification { get; set; }
         void SetStrategy(IComparisonStrategy strategy);
+
         /// <summary>
         /// Causes the current object to pay attention to the class.
         /// </summary>
@@ -28,6 +29,7 @@ namespace Week4.People
         /// This method simulates paying attention displaying a message.
         /// </remarks>
         void PayAttention();
+
         /// <summary>
         /// Causes the current object to lose focus and perform a random distraction action.
         /// </summary>
@@ -35,12 +37,18 @@ namespace Week4.People
         /// This method simulates a loss of focus by selecting and displaying a random distraction action. 
         /// </remarks>
         void LoseFocus();
+
         /// <summary>
         /// Generates a random <see cref="int"/> representing an answer to a question for exam simulation.
         /// </summary>
         /// <param name="question">The question number being answered.</param>
         /// <returns>A random <see cref="int"/> between 1 (lowest score) and 2 (medium score).</returns>
         int AnswerQuestion(int question);
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that contains the student calification information.
+        /// </summary>
+        /// <returns>A <see cref="string"/> to display.</returns>
         string ShowCalification();
     }
 }

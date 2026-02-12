@@ -12,7 +12,7 @@ namespace Week1.People
     /// Represents a Student entity that extends <see cref="Person"/> with academic attributes.
     /// </summary>
     /// <remarks>
-    /// Inherits comparison logic from <see cref="Person"/> and implements specific student behaviors.
+    /// Inherits basic attributes from <see cref="Person"/>, implements specific student behaviors, and delegates comparison logic to concrete classes that change in runtime.
     /// </remarks>
     public class Alumno : Person, IAlumno
     {
@@ -39,17 +39,17 @@ namespace Week1.People
         // Week 2: now delegate to Strategy Pattern Comparison
         public override bool IsEqual(IMyComparable other)
         {
-            return _strategy.IsEqual(this, (Alumno)other);
+            return _strategy.IsEqual(this, (IAlumno)other);
         }
 
         public override bool IsLessThan(IMyComparable other)
         {
-            return _strategy.IsLessThan(this, (Alumno)other);
+            return _strategy.IsLessThan(this, (IAlumno)other);
         }
 
         public override bool IsGreaterThan(IMyComparable other)
         {
-            return _strategy.IsGreaterThan(this, (Alumno)other);
+            return _strategy.IsGreaterThan(this, (IAlumno)other);
         }
 
         // ---------------------------------------------------------
