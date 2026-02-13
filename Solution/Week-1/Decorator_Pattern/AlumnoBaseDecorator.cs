@@ -24,7 +24,7 @@ namespace Week4.Decorator_Pattern
             this._wrappee = alumno;
         }
 
-        public string Name { get => _wrappee.Name; }
+        public string Name { get => _wrappee.Name; set => _wrappee.Name = value; }
         public int Id { get => _wrappee.Id; }
         public int FileNumber { get => _wrappee.FileNumber; }
         public double Average { get => _wrappee.Average; }
