@@ -15,7 +15,7 @@ namespace Week4.People
     /// </remarks>
     public interface IAlumno : IMyComparable, IObserver
     {
-        string Name { get; }
+        string Name { get; set; }
         int Id { get; }
         int FileNumber { get; }
         double Average { get; }

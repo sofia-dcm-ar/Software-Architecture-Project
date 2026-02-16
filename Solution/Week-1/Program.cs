@@ -9,11 +9,11 @@ using Week2.Strategy_Pattern;
 using Week3.FactoryMethod_Pattern;
 using Week4.Decorator_Pattern;
 using Week4.People;
+using Week5.Command_Pattern;
+using Week5.People;
 
-// Factories: ( 1 MyNumber ) ( 2 Alumno ) ( 3 Professor ) ( 4 DiligentAlumno ) ( 5 AlumnoBaseDecorator ) ( 6 DiligentAlumnoBaseDecorator )
-// Week 4 Exercise: Implement a main function that instantiates a teacher, makes 20 students arrive with the GoToClass method
-//The Students are instances of the adapter implemented in the previous exercise.
-//10 of them will adapt an instance of the Alumno class, while another 10 will adapt DiligentAlumno
+// Factories: ( 1 MyNumber ) ( 2 Alumno ) ( 3 Professor ) ( 4 DiligentAlumno ) ( 5 AlumnoBaseDecorator ) ( 6 DiligentAlumnoBaseDecorator ) ( 7 AlumnoProxy )
+//Week 5 Exercise: Implement the proxy and the command patterns in a class simulation.
 
 namespace Week3
 {
@@ -21,14 +21,23 @@ namespace Week3
     {
         public static void Main(string[] args)
         {
-
+            PrintTitle("Class with Alumno Proxy");
+            RandomDataGenerator generator = new RandomDataGenerator();
             Teacher teacher = new Teacher();
-            for (int i = 0; i<10; i++)
+            for (int i = 0; i<4; i++)
             {
-                teacher.goToClass(new AlumnoAdapter((AlumnoBaseDecorator)MyComparableFactory.RandomCreate(5)));
-                teacher.goToClass(new AlumnoAdapter((AlumnoBaseDecorator)MyComparableFactory.RandomCreate(6)));
+                teacher.goToClass(new AlumnoAdapter((AlumnoProxy)MyComparableFactory.RandomCreate(7)));
             }
             teacher.teachingAClass();
+
+            PrintTitle("Classroom handled by queue using command pattern");
+            Classroom classroom = new Classroom();
+            MyQueue queued = new MyQueue();
+
+            CommandedQueue(queued, classroom, true, true, true);
+
+            FillCollection(queued, 2);
+            FillCollection(queued, 4);
 
             Console.Write("Press any key to continue . . . ");
             Console.ReadKey(true);
@@ -43,21 +52,21 @@ namespace Week3
         }
 
         /// <summary>
-        /// Displays a detailed report based on the provided collection.
+        /// Sets new specific behavior by enabling concrete commands in the collection.
         /// </summary>
-        /// <remarks>The report includes the total elements count, the minimum and maximum values, and the result of searching for a specific element provided via keyboard input</remarks>
-        /// <param name="collection">The <see cref="IMyCollection"/> instance to be analyzed.</param>
-        /// <param name="option">Determines which concrete object to create for search in the collection (1: Number, 2: Alumno, 3: Professor).</param>
-        public static void Report(IMyCollection collection, int option)
+        /// <param name="queue">The <see cref="MyQueue"/> instance to set the concrete commands.</param>
+        /// <param name="classroom">The <see cref="Classroom"/> to wrap inside the concrete commands.</param>
+        /// <param name="startCommand">Set the command to be executed when the collection process starts.</param>
+        /// <param name="arribalCommand">Set the command to be executed whenever a new student arrives at the collection.</param>
+        /// <param name="fullClassCommand">Set the command to be executed when the collection reaches its maximum capacity</param>
+        public static void CommandedQueue(MyQueue queue, Classroom classroom, bool startCommand = false, bool arribalCommand = false, bool fullClassCommand = false) 
         {
-            Console.WriteLine("Number of Items: "+ collection.Count());
-            Console.WriteLine("Greaten Element: "+collection.Maximum());
-            Console.WriteLine("Lesser Element: "+collection.Minimum());
-            IMyComparable comparable = MyComparableFactory.KeyboardCreate(option);
-            if (collection.Contains(comparable))
-                Console.WriteLine("\nThe read element is in the collection");
-            else
-                Console.WriteLine("\nThe read element is not in the collection");
+            if(startCommand)
+                queue.SetStartCommand(new StartCommand(classroom));
+            if(arribalCommand)
+                queue.SetAlumnoArrivalCommand(new AlumnoArrivalCommand(classroom));
+            if(fullClassCommand)
+                queue.SetFullClassroomCommand(new FullClassroomCommand(classroom));
         }
 
         /// <summary>
@@ -73,49 +82,6 @@ namespace Week3
             }
         }
 
-        /// <summary>
-        /// Display the <see cref="IMyCollection"/> elements using the concrete iterator.
-        /// </summary>
-        /// <param name="collection">The <see cref="IMyCollection"/> instance to be iterated.</param>
-        public static void PrintElements(IMyCollection collection)
-        {
-            IIterator concreteIterator = collection.CreateIterator();
-            concreteIterator.First();
-            while (!concreteIterator.IsDone())
-            {
-                Console.WriteLine(concreteIterator.CurrentItem());
-                concreteIterator.Next();
-            }
-
-        }
-
-        /// <summary>
-        /// Change the <see cref="IComparisonStrategy"/> to all the <see cref="IMyCollection"/> elements.
-        /// </summary>
-        /// <param name="collection">The <see cref="IMyCollection"/> instance to be iterated.</param>
-        /// <param name="newStrategy">The new <see cref="IComparisonStrategy"/> to set.</param>
-        public static void ChangeComparisonStrategy(IMyCollection collection, IComparisonStrategy newStrategy)
-        {
-            IIterator concreteIterator = collection.CreateIterator();
-            while (!concreteIterator.IsDone())
-            {
-                ((Alumno)concreteIterator.CurrentItem()).SetStrategy(newStrategy);
-                concreteIterator.Next();
-            }
-        }
-
-        /// <summary>
-        /// Teaches a class speaking and writing.
-        /// </summary>
-        /// <param name="professor">The <see cref="Professor"/> instance that teach the class.</param>
-        public static void TeachingClasses(Professor professor)
-        {
-            for (int i = 0; i<2; i++)
-            {
-                professor.SpeakToTheClass();
-                professor.WriteInTheBoard();
-            }
-        }
     }
 
 }

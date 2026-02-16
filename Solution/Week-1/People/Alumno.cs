@@ -19,14 +19,14 @@ namespace Week1.People
         private int _fileNumber;
         private double _average;
         private IComparisonStrategy _strategy;
-        private int _calification;// Week 4
+        private int _calification;
 
         public Alumno(string name, int id, int fileNumber, double average) : base(name, id)
         {
             _fileNumber=fileNumber;
             _average=average;
             _strategy= new IDComparison();
-            _calification=0; // Week 4
+            _calification=0;
         }
 
         public int FileNumber { get => _fileNumber; }

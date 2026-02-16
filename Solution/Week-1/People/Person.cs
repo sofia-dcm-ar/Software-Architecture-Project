@@ -20,7 +20,7 @@ namespace Week1.People
             _id=id;
         }
 
-        public string Name { get =>  _name; }
+        public string Name { get => _name; set => _name=value; }
         public int Id { get => _id; }
 
 

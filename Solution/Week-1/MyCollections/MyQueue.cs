@@ -2,18 +2,27 @@
 using System.Collections.Generic;
 using Week2;
 using Week2.Iterator_Pattern;
+using Week5.Command_Pattern;
+
+//Week 5 Exercice: Implement the necessary attributes for the Orderable interface
+//The queue can be just a queue or have orders associated with it 
 
 namespace Week1.MyCollections
 {
     /// <summary>
-    /// Represents a Queue-based implementation of <see cref="IMyCollection"/> that stores <see cref="IMyComparable"/> elements.
+    /// Represents a Queue-based implementation of <see cref="IMyCollection"/> that stores <see cref="IMyComparable"/> elements 
+    /// and implements <see cref="IOrderable"/> to support command injection.
     /// </summary>
     /// <remarks>
     /// This collection follows a FIFO (First-In-First-Out) structure and provides specialized comparison and search utilities.
+    /// As an <c>invoker</c> in the Command Pattern, it triggers specific behaviors during the <see cref="Enqueue"/> process based on its internal state.
     /// </remarks>
-    public class MyQueue : IMyCollection
+    public class MyQueue : IMyCollection, IOrderable
     {
         private readonly List<IMyComparable> _queued;
+        IClassroomCommand1 _startCommand;
+        IClassroomCommand1 _fullClassroomCommand;
+        IClassroomCommand2 _alumnoArrivalCommand;
 
         public MyQueue()
         {
@@ -76,12 +85,41 @@ namespace Week1.MyCollections
             return new MyQueueIterator(this);
         }
 
+        // -----------------------------------------------------------
+        // Command Pattern Implementation (IOrderable)
+        // -----------------------------------------------------------
+        public void SetStartCommand(IClassroomCommand1 command)
+        {
+            _startCommand=command;
+        }
+        public void SetAlumnoArrivalCommand(IClassroomCommand2 command)
+        {
+            _alumnoArrivalCommand=command;
+        }
+        public void SetFullClassroomCommand(IClassroomCommand1 command)
+        {
+            _fullClassroomCommand=command;
+        }
         //-----------------------------------------------------------
         // Queue methods
         //-----------------------------------------------------------
+        /// <summary>
+        /// Adds an object to the end of the queue and triggers specific behaviors based on the current <see cref="MyQueue"/> internal state.
+        /// </summary>
+        /// <param name="comparable">The <see cref="IMyComparable"/> instance to be enqueued.</param>
         public void Enqueue(IMyComparable comparable)
         {
             _queued.Add(comparable);
+
+            //Only if commands are active
+            if (this.Count()==1 && _startCommand!=null)
+                _startCommand.Execute();
+
+            if (_alumnoArrivalCommand!=null)
+                _alumnoArrivalCommand.Execute(comparable);
+
+            if (this.Count()==40 && _fullClassroomCommand!=null)
+                _fullClassroomCommand.Execute();
         }
 
         public IMyComparable Dequeue()
