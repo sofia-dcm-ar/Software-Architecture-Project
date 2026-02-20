@@ -92,6 +92,11 @@ namespace Week1.People
             Console.WriteLine(actions[r.Next(2)]);
         }
 
+        /// <summary>
+        /// Generates a random <see cref="int"/> representing an answer to a question for exam simulation.
+        /// </summary>
+        /// <param name="question">The question number being answered.</param>
+        /// <returns>A random <see cref="int"/> between 1 (lowest score) and 2 (medium score).</returns>
         public virtual int AnswerQuestion(int question) // Week 4
         {
             Random r = new Random();

@@ -20,7 +20,12 @@ namespace Week3
         /// <returns>An <see cref="int"/> instance.</returns>
         public int KeyboardNumber()
         {
-            return (int.Parse(Console.ReadLine()));
+            string stringNumber = Console.ReadLine();
+            if (int.TryParse(stringNumber, out int intNumber))
+                return intNumber;
+            else
+                Console.WriteLine("That wasn´t an integer");
+            return 0;
         }
 
         /// <summary>

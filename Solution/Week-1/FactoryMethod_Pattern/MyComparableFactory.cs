@@ -2,6 +2,7 @@
 using Week1;
 using Week1.FactoryMethod_Pattern;
 using Week4.FactoryMethod_Pattern;
+using Week6.FactoryMethod_Pattern;
 
 //Week 3 Exercise: Implement the abstract class Factory for Factory Method Pattern
 
@@ -22,7 +23,7 @@ namespace Week3.FactoryMethod_Pattern
         /// <summary>
         /// Creates an <see cref="IMyComparable"/> instance with random data using a specific concrete factory.
         /// </summary>
-        /// <param name="option">Determines which concrete factory to use (1: Number, 2: Alumno, 3: Professor, 4: Diligent Alumno, 5: Decorated Alumno, 6: Decorated Diligent Alumno, 7: Proxy Alumno).</param>
+        /// <param name="option">Determines which concrete factory to use (1: Number, 2: Alumno, 3: Professor, 4: Diligent Alumno, 5: Decorated Alumno, 6: Decorated Diligent Alumno, 7: Proxy Alumno, 8: Composite Alumno).</param>
         /// <returns>A concrete <see cref="IMyComparable"/> object.</returns>
         public static IMyComparable RandomCreate(int option)
         {
@@ -32,7 +33,7 @@ namespace Week3.FactoryMethod_Pattern
         /// <summary>
         /// Creates an <see cref="IMyComparable"/> instance by reading keyboard input using a specific concrete factory.
         /// </summary>
-        /// <param name="option">Determines which concrete factory to use (1: Number, 2: Alumno, 3: Professor, 4: Diligent Alumno, 5: Decorated Alumno, 6: Decorated Diligent Alumno, 7: Proxy Alumno).</param>
+        /// <param name="option">Determines which concrete factory to use (1: Number, 2: Alumno, 3: Professor, 4: Diligent Alumno, 5: Decorated Alumno, 6: Decorated Diligent Alumno, 7: Proxy Alumno, 8: Composite Alumno).</param>
         /// <returns>A concrete <see cref="IMyComparable"/> object.</returns>
         public static IMyComparable KeyboardCreate(int option)
         {
@@ -72,6 +73,9 @@ namespace Week3.FactoryMethod_Pattern
                     break;
                 case 7:
                     factory = new AlumnoProxyFactory();
+                    break;
+                case 8:
+                    factory = new CompositeAlumnoFactory();
                     break;
                 default:
                     throw new ArgumentException($"The option {option} is not a valid factory type");
