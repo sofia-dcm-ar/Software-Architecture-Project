@@ -220,7 +220,7 @@ namespace Week6.People
         /// Removes the first ocurrence of an <see cref="IAlumno"/>. 
         /// </summary>
         /// <param name="alumno">The <see cref="IAlumno"/> to remove.</param>
-        /// <param name="removed">A bool that advice if the removal was made. <see cref="true"/> if the instance was removed; otherwhise <see cref="false"/>.</param>
+        /// <param name="removed">A bool that advice if the removal was made. <see langword="true"/> if the instance was removed; otherwhise <see langword="false"/>.</param>
         /// <returns></returns>
         public bool Remove(IAlumno alumno, bool removed = false)
         {

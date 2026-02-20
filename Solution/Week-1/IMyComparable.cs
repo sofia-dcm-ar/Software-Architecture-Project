@@ -17,14 +17,14 @@ namespace Week1
         /// Determines whether the current instance is equal to another <see cref="IMyComparable"/> object.
         /// </summary>
         /// <param name="other">The object to compare with the current instance.</param>
-        /// <returns>True if the objects are considered equal; otherwise, false.</returns>
+        /// <returns><see langword="true"/> if the objects are considered equal; otherwise, <see langword="false"/>.</returns>
         bool IsEqual(IMyComparable other);
 
         /// <summary>
         /// Determines whether the current instance is less than another <see cref="IMyComparable"/> object.
         /// </summary>
         /// <param name="other">The object to compare with the current instance.</param>
-        /// <returns>True if the current object is less; otherwise, false.</returns>
+        /// <returns><see langword="true"/> if the current object is less; otherwise, <see langword="false"/>.</returns>
 
         bool IsLessThan(IMyComparable other);
 
@@ -32,7 +32,7 @@ namespace Week1
         /// Determines whether the current instance is greater than another <see cref="IMyComparable"/> object.
         /// </summary>
         /// <param name="other">The object to compare with the current instance.</param>
-        /// <returns>True if the current object is greater; otherwise, false.</returns>
+        /// <returns><see langword="true"/> if the current object is greater; otherwise, <see langword="false"/>.</returns>
         bool IsGreaterThan(IMyComparable other);
 
     }

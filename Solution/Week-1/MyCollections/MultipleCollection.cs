@@ -74,7 +74,7 @@ namespace Week1.MyCollections
         /// Determines whether the collections contains a specific element. 
         /// </summary>
         /// <param name= "comparable"> the <see cref="IMyComparable"/> object to locate in the collections.</param>
-        /// <returns>true if object is found; otherwise false.</returns>
+        /// <returns><see langword="true"/> if object is found; otherwise <see langword="false"/>.</returns>
         public bool Contains(IMyComparable comparable)
         {
             return _stacked.Contains(comparable)||_queued.Contains(comparable);
