@@ -16,13 +16,13 @@ namespace Week3
         }
 
         /// <summary>
-        /// Creates a random <see cref="int"/> between 0 and <paramref name="max"/>.
+        /// Creates a random <see cref="int"/> between 1 and <paramref name="max"/>.
         /// </summary>
         /// <param name="max">The maximum number to select.</param>
         /// <returns>A random <see cref="int"/> instance.</returns>
-        public int RandomNumber(int max = 10)
+        public int RandomNumber(int max = 13)
         {
-            return this._r.Next(max);
+            return _r.Next(1, max);
         }
 
         /// <summary>

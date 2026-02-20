@@ -40,7 +40,7 @@ namespace Week1.MyCollections
         /// Determines whether the collection contains a specific element. 
         /// </summary>
         /// <param name= "comparable"> the <see cref="IMyComparable"/> object to locate in the collection.</param>
-        /// <returns>true if object is found; otherwise false.</returns>
+        /// <returns><see langword="true"/> if object is found; otherwise <see langword="false"/>.</returns>
         bool Contains(IMyComparable comparable);
     }
 }
