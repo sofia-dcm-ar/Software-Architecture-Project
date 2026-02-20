@@ -20,17 +20,19 @@ namespace Week3
     class Program
     {
         public static void Main(string[] args)
-        {
-
-                PrintTitle("Classroom handled by queue using command pattern");
-                Classroom classroom = new Classroom();
-                MyQueue queued = new MyQueue();
-
+        { 
+            PrintTitle("Classroom handled by queue using command pattern");
+            Classroom classroom = new Classroom();
+            MyQueue queued = new MyQueue();
+            try
+            {
                 CommandedQueue(queued, classroom, true, true, true);
                 queued.Add(MyComparableFactory.RandomCreate(8));
                 FillCollection(queued, 2);
                 FillCollection(queued, 4);
-
+            }
+            catch (ArgumentException ex)
+            { Console.WriteLine(ex.Message); }
 
             Console.Write("Press any key to continue . . . ");
             Console.ReadKey(true);
