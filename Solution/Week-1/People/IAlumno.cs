@@ -42,7 +42,7 @@ namespace Week4.People
         /// Generates a random <see cref="int"/> representing an answer to a question for exam simulation.
         /// </summary>
         /// <param name="question">The question number being answered.</param>
-        /// <returns>A random <see cref="int"/> between 1 (lowest score) and 2 (medium score).</returns>
+        /// <returns>A random <see cref="int"/> between 1 (lowest score) and 3 (highest score).</returns>
         int AnswerQuestion(int question);
 
         /// <summary>
