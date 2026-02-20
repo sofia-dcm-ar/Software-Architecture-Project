@@ -13,7 +13,7 @@ using Week5.Command_Pattern;
 using Week5.People;
 
 // Factories: ( 1 MyNumber ) ( 2 Alumno ) ( 3 Professor ) ( 4 DiligentAlumno ) ( 5 AlumnoBaseDecorator ) ( 6 DiligentAlumnoBaseDecorator ) ( 7 AlumnoProxy )
-//Week 5 Exercise: Implement the proxy and the command patterns in a class simulation.
+//Week 6 Exercise: Add a CompositeAlumno to the queue
 
 namespace Week3
 {
@@ -21,23 +21,16 @@ namespace Week3
     {
         public static void Main(string[] args)
         {
-            PrintTitle("Class with Alumno Proxy");
-            RandomDataGenerator generator = new RandomDataGenerator();
-            Teacher teacher = new Teacher();
-            for (int i = 0; i<4; i++)
-            {
-                teacher.goToClass(new AlumnoAdapter((AlumnoProxy)MyComparableFactory.RandomCreate(7)));
-            }
-            teacher.teachingAClass();
 
-            PrintTitle("Classroom handled by queue using command pattern");
-            Classroom classroom = new Classroom();
-            MyQueue queued = new MyQueue();
+                PrintTitle("Classroom handled by queue using command pattern");
+                Classroom classroom = new Classroom();
+                MyQueue queued = new MyQueue();
 
-            CommandedQueue(queued, classroom, true, true, true);
+                CommandedQueue(queued, classroom, true, true, true);
+                queued.Add(MyComparableFactory.RandomCreate(8));
+                FillCollection(queued, 2);
+                FillCollection(queued, 4);
 
-            FillCollection(queued, 2);
-            FillCollection(queued, 4);
 
             Console.Write("Press any key to continue . . . ");
             Console.ReadKey(true);
@@ -73,7 +66,7 @@ namespace Week3
         /// Fill the <see cref="IMyCollection"/> with 20 random <see cref="IMyComparable"/> objects.
         /// </summary>
         /// <param name="collection">The <see cref="IMyCollection"/> instance to be filled.</param>
-        /// <param name="option">Determines which concrete objects to create for fill the collection (1: Number, 2: Alumno, 3: Professor).</param>
+        /// <param name="option">Determines which concrete objects to create for fill the collection (1: Number, 2: Alumno, 3: Professor, 4: Diligent Alumno, 5: Decorated Alumno, 6: Decorated Diligent Alumno, 7: Proxy Alumno, 8: Composite Alumno).</param>
         public static void FillCollection(IMyCollection collection, int option)
         {
             for (int i = 0; i<20; i++)
