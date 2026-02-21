@@ -12,8 +12,10 @@ using Week4.People;
 using Week5.Command_Pattern;
 using Week5.People;
 
-// Factories: ( 1 MyNumber ) ( 2 Alumno ) ( 3 Professor ) ( 4 DiligentAlumno ) ( 5 AlumnoBaseDecorator ) ( 6 DiligentAlumnoBaseDecorator ) ( 7 AlumnoProxy )
-//Week 6 Exercise: Add a CompositeAlumno to the queue
+// Factories:
+// ( 1 MyNumber ) ( 2 Alumno ) ( 3 Professor ) ( 4 DiligentAlumno )
+// ( 5 AlumnoBaseDecorator ) ( 6 DiligentAlumnoBaseDecorator ) ( 7 AlumnoProxy ) (8 CompositeAlumno )
+//Week 7 Exercise: Add a specific amount of Alumnos of different types using a function
 
 namespace Week3
 {
@@ -27,9 +29,29 @@ namespace Week3
             try
             {
                 CommandedQueue(queued, classroom, true, true, true);
-                queued.Add(MyComparableFactory.RandomCreate(8));
-                FillCollection(queued, 2);
-                FillCollection(queued, 4);
+
+                //1 Composite Alumno -> Random
+                FillCollection(queued, 8, 1, 1);
+                PrintTitle("Composite Alumno creado");
+                //3 Proxy Alumno -> Random
+                FillCollection(queued, 7, 3, 1);
+                PrintTitle("proxis creado");
+                // 16 Diligent Alumno -> Random
+                FillCollection(queued, 6, 16, 1);
+                PrintTitle("diligent Alumno random creado");
+                //4 Diligent Alumno -> File read
+                FillCollection(queued, 6, 4, 3);
+                PrintTitle("diligent Alumno file creado");
+                //5 Alumno -> File read
+                FillCollection(queued, 5, 5, 3);
+                PrintTitle(" Alumno file creado");
+                //10 Alumno -> Random
+                FillCollection(queued, 5, 10, 1);
+                PrintTitle(" Alumno random creado");
+                //1 Alumno -> Keyboard
+                FillCollection(queued, 2, 1, 2);
+                PrintTitle(" Alumno teclado creado");
+
             }
             catch (ArgumentException ex)
             { Console.WriteLine(ex.Message); }
@@ -65,15 +87,29 @@ namespace Week3
         }
 
         /// <summary>
-        /// Fill the <see cref="IMyCollection"/> with 20 random <see cref="IMyComparable"/> objects.
+        /// Fill the <see cref="IMyCollection"/> with <see cref="IMyComparable"/> objects following the selected options.
         /// </summary>
         /// <param name="collection">The <see cref="IMyCollection"/> instance to be filled.</param>
-        /// <param name="option">Determines which concrete objects to create for fill the collection (1: Number, 2: Alumno, 3: Professor, 4: Diligent Alumno, 5: Decorated Alumno, 6: Decorated Diligent Alumno, 7: Proxy Alumno, 8: Composite Alumno).</param>
-        public static void FillCollection(IMyCollection collection, int option)
+        /// <param name="alumnoOption">Determines which concrete objects to create for fill the collection (1: Number, 2: Alumno, 3: Professor, 4: Diligent Alumno, 5: Decorated Alumno, 6: Decorated Diligent Alumno, 7: Proxy Alumno, 8: Composite Alumno).</param>
+        /// <param name="amount">Determines the amount of instances to create and add to the collection.</param>
+        /// <param name="creationOption">Determines the imput method for create the <see cref="IMyComparable"/> instances (1: Random, 2: Keyboard, 3: Text file).</param>
+        public static void FillCollection(IMyCollection collection, int alumnoOption, int amount, int creationOption) 
         {
-            for (int i = 0; i<20; i++)
+            for (int i = 0; i<amount; i++)
             {
-                collection.Add(MyComparableFactory.RandomCreate(option));
+                switch (creationOption)
+                {
+                    case 1:
+                        collection.Add(MyComparableFactory.RandomCreate(alumnoOption));
+                        break;
+                    case 2:
+                        collection.Add(MyComparableFactory.KeyboardCreate(alumnoOption));
+                        break;
+                    case 3:
+                        collection.Add(MyComparableFactory.FileCreate(alumnoOption));
+                        break;
+                }
+                
             }
         }
 
