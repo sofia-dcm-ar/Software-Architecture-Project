@@ -2,7 +2,7 @@
 using System.Text;
 using Week7.ChainOfResponsability_Pattern;
 
-//Week 7 Exercise: Made the class a concrete handler
+//Week 7 Exercise: Made the class a concrete handle and only instance
 
 namespace Week1.ChainOfResponsability_Pattern
 {
@@ -10,15 +10,39 @@ namespace Week1.ChainOfResponsability_Pattern
     /// Represents a data generator that creates random strings and numbers.
     /// </summary>
     /// <remarks>
-    /// This class is a concrete handler, part of the chain of data provider handlers following the Chain of Responsability Pattern.
+    /// <para>This class is a <c>concrete handler</c>, part of the chain of data provider handlers following the Chain of Responsability Pattern.</para>
+    /// <para>This class is a <c>single instance</c> following the singletone pattern.</para>
     /// </remarks>
     public class RandomDataGenerator : BaseHandler
     {
         private readonly Random _r;
+        private static RandomDataGenerator _instance = null;
+
         public RandomDataGenerator(BaseHandler handler) : base(handler) 
         {
             _r = new Random();
         }
+
+        //------------------------------------------------------
+        // Singletone Pattern Implementation
+        //------------------------------------------------------
+
+        /// <summary>
+        /// Gets the unique instance of the <see cref="RandomDataGenerator"/> class.
+        /// </summary>
+        /// <remarks>This method is the only acces to the instance.</remarks>
+        /// <param name="handler">The <see cref="BaseHandler"/> instance to assign if it has not been created yet</param>
+        /// <returns>The current singleton instance of the handler.</returns>
+        public static RandomDataGenerator GetInstance(BaseHandler handler)
+        {
+            if (_instance==null)
+                _instance = new RandomDataGenerator(handler);
+            return _instance;
+        }
+
+        //-------------------------------------------------------
+        // RandomDataGenerator methods
+        //-------------------------------------------------------
 
         /// <summary>
         /// Creates a random <see cref="int"/> between 1 and <paramref name="max"/>.
@@ -49,5 +73,6 @@ namespace Week1.ChainOfResponsability_Pattern
             }
             return token.ToString();
         }
+
     }
 }

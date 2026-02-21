@@ -117,10 +117,10 @@ namespace Week3.FactoryMethod_Pattern
         /// Creates the chain of data provider handlers following the Chain of Responsability Pattern.
         /// </summary>
         protected void CreateChainOfHandlers()
-        { 
-            BaseHandler handler = new DataKeyboardReader(null);
+        {
+            BaseHandler handler = DataKeyboardReader.GetInstance(null);
             handler = new FileDataReader(handler);
-            handler = new RandomDataGenerator(handler);
+            handler = RandomDataGenerator.GetInstance(handler);
             _chainOfHandlers=handler;
         }
     }

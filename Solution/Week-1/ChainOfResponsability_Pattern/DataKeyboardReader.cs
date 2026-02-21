@@ -1,7 +1,7 @@
 ﻿using System;
-using Week7.ChainOfResponsability_Pattern:
+using Week7.ChainOfResponsability_Pattern;
 
-//Week 3 Exercise: Implement a class capable of reading data from keyboard
+//Week 7 Exercise: Make the handlers single instances following the singletone pattern
 
 namespace Week1.ChainOfResponsability_Pattern
 {
@@ -10,11 +10,34 @@ namespace Week1.ChainOfResponsability_Pattern
     /// </summary>
     /// <remarks>
     /// This class facilitates user input for creating string and number instances during runtime. 
-    /// This class is a concrete handler, part of the chain of data provider handlers following the Chain of Responsability Pattern.
+    /// <para>This class is a <c>concrete handler</c>, part of the chain of data provider handlers following the Chain of Responsability Pattern.</para>
+    /// <para>This class is a <c>single instance</c> following the singletone pattern.</para>
     /// </remarks>
     public class DataKeyboardReader : BaseHandler
     {
+        private static DataKeyboardReader _instance = null;
         public DataKeyboardReader(BaseHandler handler) : base(handler) { }
+
+        //------------------------------------------------------
+        // Singletone Pattern Implementation
+        //------------------------------------------------------
+
+        /// <summary>
+        /// Gets the unique instance of the <see cref="DataKeyboardReader"/> class.
+        /// </summary>
+        /// <remarks>This method is the only acces to the instance.</remarks>
+        /// <param name="handler">The <see cref="BaseHandler"/> instance to assign if it has not been created yet</param>
+        /// <returns>The current singleton instance of the handler.</returns>
+        public static DataKeyboardReader GetInstance(BaseHandler handler)
+        {
+            if (_instance==null)
+                _instance = new DataKeyboardReader(handler);
+            return _instance;
+        }
+
+        //-------------------------------------------------------
+        // RandomDataGenerator methods
+        //-------------------------------------------------------
 
         /// <summary>
         /// Creates an <see cref="int"/> from keyboard input.
