@@ -9,6 +9,7 @@ Different Software Architectures for POO applied in C# using SharpDevelop versio
 * *Interface design*
 * *Software Architecture design*
 * *Problem solving*
+* *XML Documentation*
 
 ## Project Description
 * Acquire knowledge of a new software architecture every week.
