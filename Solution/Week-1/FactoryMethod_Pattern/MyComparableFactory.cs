@@ -1,10 +1,12 @@
 ﻿using System;
 using Week1;
+using Week1.ChainOfResponsability_Pattern;
 using Week1.FactoryMethod_Pattern;
 using Week4.FactoryMethod_Pattern;
 using Week6.FactoryMethod_Pattern;
+using Week7.ChainOfResponsability_Pattern;
 
-//Week 3 Exercise: Implement the abstract class Factory for Factory Method Pattern
+//Week 7 Exercise: Implement the Chain of responsability pattern adding the handlers
 
 namespace Week3.FactoryMethod_Pattern
 {
@@ -13,12 +15,11 @@ namespace Week3.FactoryMethod_Pattern
     /// </summary>
     /// <remarks>
     /// <see cref="MyComparableFactory"/> defines a common interface for creating <see cref="IMyComparable"/> objects either with randomly generated data 
-    /// or by reading input from the keyboard.
+    /// , reading input from the keyboard, or by reading data from text files.
     /// </remarks>
     public abstract class MyComparableFactory
     {
-        protected RandomDataGenerator _create = new RandomDataGenerator();
-        protected DataKeyboardReader _read = new DataKeyboardReader();
+        protected BaseHandler _chainOfHandlers;
 
         /// <summary>
         /// Creates an <see cref="IMyComparable"/> instance with random data using a specific concrete factory.
@@ -38,6 +39,17 @@ namespace Week3.FactoryMethod_Pattern
         public static IMyComparable KeyboardCreate(int option)
         {
             return CreateFactory(option).KeyboardCreate();
+        }
+
+        
+        /// <summary>
+        /// Creates an <see cref="IMyComparable"/> instance by reading data from text files using a specific concrete factory.
+        /// </summary>
+        /// <param name="option">Determines which concrete factory to use (1: Number, 2: Alumno, 3: Professor, 4: Diligent Alumno, 5: Decorated Alumno, 6: Decorated Diligent Alumno, 7: Proxy Alumno, 8: Composite Alumno).</param>
+        /// <returns>A concrete <see cref="IMyComparable"/> object.</returns>
+        public static IMyComparable FileCreate(int option) //Week 7
+        { 
+            return CreateFactory(option).FileCreate();
         }
 
         /// <summary>
@@ -94,5 +106,22 @@ namespace Week3.FactoryMethod_Pattern
         /// </summary>
         /// <returns>A concrete <see cref="IMyComparable"/>.</returns>
         public abstract IMyComparable KeyboardCreate();
+
+        /// <summary>
+        /// Creates a concrete <see cref="IMyComparable"/> object by reading data from text file.
+        /// </summary>
+        /// <returns>A concrete <see cref="IMyComparable"/>.</returns>
+        public abstract IMyComparable FileCreate();//(Week 7)
+
+        /// <summary>
+        /// Creates the chain of data provider handlers following the Chain of Responsability Pattern.
+        /// </summary>
+        protected void CreateChainOfHandlers()
+        { 
+            BaseHandler handler = new DataKeyboardReader(null);
+            handler = new FileDataReader(handler);
+            handler = new RandomDataGenerator(handler);
+            _chainOfHandlers=handler;
+        }
     }
 }

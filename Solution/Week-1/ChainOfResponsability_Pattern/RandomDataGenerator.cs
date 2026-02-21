@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Text;
+using Week7.ChainOfResponsability_Pattern;
 
-//Week 3 Exercise: Implement a class for generating random data
-namespace Week3
+//Week 7 Exercise: Made the class a concrete handler
+
+namespace Week1.ChainOfResponsability_Pattern
 {
     /// <summary>
     /// Represents a data generator that creates random strings and numbers.
     /// </summary>
-    public class RandomDataGenerator
+    /// <remarks>
+    /// This class is a concrete handler, part of the chain of data provider handlers following the Chain of Responsability Pattern.
+    /// </remarks>
+    public class RandomDataGenerator : BaseHandler
     {
         private readonly Random _r;
-        public RandomDataGenerator()
+        public RandomDataGenerator(BaseHandler handler) : base(handler) 
         {
             _r = new Random();
         }
@@ -20,7 +25,7 @@ namespace Week3
         /// </summary>
         /// <param name="max">The maximum number to select.</param>
         /// <returns>A random <see cref="int"/> instance.</returns>
-        public int RandomNumber(int max = 13)
+        public override int RandomNumber(int max = 13)
         {
             return _r.Next(1, max);
         }
@@ -33,7 +38,7 @@ namespace Week3
         /// The <see cref="string"/> created doesnt form a word, it is a string of letters from the alphabet mixed together.
         /// </remarks>
         /// <returns>A random <see cref="string"/> instance.</returns>
-        public string RandomString(int cant = 6)
+        public override string RandomString(int cant = 6)
         { 
             string alphabet = "abcdefghijklmnopqrstuvwxyz";
             StringBuilder token = new StringBuilder();

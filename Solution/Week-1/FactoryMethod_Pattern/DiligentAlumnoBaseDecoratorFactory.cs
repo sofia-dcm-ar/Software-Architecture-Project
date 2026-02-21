@@ -6,16 +6,20 @@ using Week4.Decorator_Pattern;
 using Week4.People;
 
 namespace Week4.FactoryMethod_Pattern
-{    
+{
     /// <summary>
     /// A concrete factory that implements the <see cref="MyComparableFactory"/> 
     /// to create <see cref="AlumnoBaseDecorator"/> objects that wrapps <see cref="DiligentAlumno"/> instances. 
     /// </summary>
     /// <remarks>
-    /// Encapsulates the logic for creating <see cref="DiligentAlumno"/> decorated instances either throug automated random generation or manual keyboard input.
+    /// Encapsulates the logic for creating <see cref="DiligentAlumno"/> decorated instances either throug automated random generation, automated read data from text file or manual keyboard input.
     /// </remarks>
     public class DiligentAlumnoBaseDecoratorFactory : MyComparableFactory
     {
+        public DiligentAlumnoBaseDecoratorFactory()
+        {
+            this.CreateChainOfHandlers();
+        }
         /// <summary>
         /// Creates a new <see cref="AlumnoBaseDecorator"/> object that wrapp <see cref="DiligentAlumno"/> instance with automated randomly generated attributes.
         /// </summary>
@@ -32,6 +36,16 @@ namespace Week4.FactoryMethod_Pattern
         public override IMyComparable KeyboardCreate()
         {
             return this.Decorate(MyComparableFactory.KeyboardCreate(4));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="AlumnoBaseDecorator"/> object that wrapp <see cref="DiligentAlumno"/> instance with automated read data from text file attributes.
+        /// </summary>
+        /// <returns>A concrete <see cref="AlumnoBaseDecorator"/> object that wrapp <see cref="DiligentAlumno"/> instance as an <see cref="IMyComparable"/>.</returns>
+
+        public override IMyComparable FileCreate()
+        {
+            return this.Decorate(MyComparableFactory.FileCreate(4));
         }
 
         /// <summary>

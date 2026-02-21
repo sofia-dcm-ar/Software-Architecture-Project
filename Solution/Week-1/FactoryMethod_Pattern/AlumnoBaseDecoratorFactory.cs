@@ -10,10 +10,15 @@ namespace Week4.FactoryMethod_Pattern
     /// A concrete factory that implements the <see cref="MyComparableFactory"/> to create <see cref="AlumnoBaseDecorator"/> instances. 
     /// </summary>
     /// <remarks>
-    /// Encapsulates the logic for creating <see cref="AlumnoBaseDecorator"/> instances either throug automated random generation or manual keyboard input.
+    /// Encapsulates the logic for creating <see cref="AlumnoBaseDecorator"/> instances either throug automated random generation, automated read data from text file or manual keyboard input.
     /// </remarks>
     public class AlumnoBaseDecoratorFactory : MyComparableFactory
     {
+        public AlumnoBaseDecoratorFactory()
+        {
+            this.CreateChainOfHandlers();
+        }
+
         /// <summary>
         /// Creates a new <see cref="AlumnoBaseDecorator"/> with automated randomly generated attributes.
         /// </summary>
@@ -30,6 +35,15 @@ namespace Week4.FactoryMethod_Pattern
         public override IMyComparable KeyboardCreate()
         {
             return this.Decorate(MyComparableFactory.KeyboardCreate(2));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="AlumnoBaseDecorator"/> with automated read data from text file attributes.
+        /// </summary>
+        /// <returns>A concrete <see cref="AlumnoBaseDecorator"/> as an <see cref="IMyComparable"/>.</returns>
+        public override IMyComparable FileCreate()
+        {
+            return this.Decorate(MyComparableFactory.FileCreate(2));
         }
 
         /// <summary>

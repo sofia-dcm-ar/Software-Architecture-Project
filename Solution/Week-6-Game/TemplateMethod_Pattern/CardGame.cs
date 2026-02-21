@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Week3;
+using Week1.ChainOfResponsability_Pattern;
+
 
 //Week 6 Exercise: Create the themplate for a card game using the template method
 
